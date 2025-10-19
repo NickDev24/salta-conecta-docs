@@ -68,7 +68,7 @@ SaltaConecta es una plataforma B2B completa que conecta mayoristas, proveedores 
 ### **DevOps**
 
 - **Docker** - Containerización
-- **Vercel** - Despliegue
+- **AWS** - Despliegue
 - **Jest** - Testing
 - **ESLint** - Linting
 - **Prettier** - Formateo de código
