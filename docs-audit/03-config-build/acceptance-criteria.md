@@ -1,0 +1,24 @@
+# Criterios de aceptación (03-config-build)
+
+- **[CSP endurecida]** `next.config.js`:
+  - Sin `'unsafe-eval'` y `'unsafe-inline'` o justificación documentada con Nonces/Hashes.
+  - Lista de dominios reducida a los estrictamente necesarios (Google Maps, Mercado Pago si aplica).
+- **[Validación de env]** `next.config.js`:
+  - El build falla en producción cuando faltan variables críticas, o existe job de CI que falla con reporte claro.
+- **[CORS]** `next.config.js`:
+  - En producción no se usa `*`. Orígenes permitidos declarados explícitamente por entorno.
+- **[Exposición de env]** `next.config.js`:
+  - Solo `NEXT_PUBLIC_*` expuestas; ninguna clave sensible en `env` del cliente.
+- **[TS Config]** `tsconfig.json`:
+  - Decisión tomada sobre `allowJs`/`skipLibCheck` y aplicada; `type-check` en CI (`tsc --noEmit`) pasa sin errores críticos.
+- **[ESLint]** `.eslintrc.json`:
+  - Política de `console` definida (bloqueo en prod o wrapper `logger`).
+- **[Jest]** `jest.config.js`:
+  - Umbral de cobertura acordado y cumplido en CI; `collectCoverageFrom` actualizado si es necesario.
+- **[Docker Compose]** `docker-compose.yml`:
+  - Secretos fuera del archivo y `healthcheck` + límites de recursos aplicados.
+  - Puertos de `mongo` y `redis` no expuestos a host salvo necesidad.
+- **[Vercel]** `vercel.json`:
+  - `maxDuration`/`regions`/`memory` definidos para rutas críticas o justificación para configuración actual.
+- **[ENV MP]** `.env*`:
+  - Alias de Mercado Pago consolidados; una sola convención documentada.

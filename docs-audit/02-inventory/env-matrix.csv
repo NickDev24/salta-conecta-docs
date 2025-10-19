@@ -1,0 +1,62 @@
+key,requiredAt(build|runtime),module,whereReferenced(file),default/sample,notes
+NODE_ENV,build,core,system,.env.example: development,Used across Next.js; influences `next.config.js`
+PORT,runtime,server,server.js|docker-compose.yml,.env.example: 3000,Runtime server port (not required on Vercel)
+NEXT_PUBLIC_APP_URL,build|runtime,web,next.config.js|pages/api/socket.ts,.env.example: http://localhost:3000,Exposed to client via `next.config.js env` and used for CORS/Socket.IO
+NEXT_PUBLIC_BASE_URL,build|runtime,web,next.config.js,.env.example: http://localhost:3000,Used in headers CORS and image/email links
+NEXT_PUBLIC_API_URL,build,web,next.config.js,.env.example: http://localhost:3000/api,Client API base
+NEXTAUTH_URL,build|runtime,auth,next.config.js|lib/auth.ts,.env.example: http://localhost:3000,NextAuth base URL
+NEXTAUTH_SECRET,runtime,auth,next.config.js|lib/auth.ts,.env.example: changeme-in-production,Server secret for NextAuth
+MONGODB_URI,runtime,db,lib/mongodb.ts|next.config.js,.env.example: mongodb+srv://...,Required to connect MongoDB
+MONGODB_DB,runtime,db,__tests__/utils/test-db.ts|lib/mongodb.ts,env.example: saltaconecta,Optional explicit DB name
+JWT_SECRET,runtime,auth,lib/auth.ts|next.config.js,.env.example: changeme-jwt,JWT signing/verification
+ENCRYPTION_KEY,runtime,security,lib/crypto.ts|next.config.js,.env.example: changeme-encryption-key,Symmetric encryption key
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,build,integrations,next.config.js|components/*maps*,.env.example: changeme-google-maps,Client Maps API key for @react-google-maps/api
+NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY,build,integrations,next.config.js|components/checkout/checkout-page.tsx,.env.example: changeme-mp-public,Public key for client SDK
+MERCADOPAGO_ACCESS_TOKEN,runtime,integrations,lib/mercadopago.ts|app/api/mercadopago/webhook/route.ts,.env.example: changeme-mp-token,Server token; also alias MP_ACCESS_TOKEN in env.example
+MP_ACCESS_TOKEN,runtime,integrations,lib/mercadopago.ts|app/api/mercadopago/webhook/route.ts,env.example: your-mercadopago-access-token,Alias checked first
+MERCADOPAGO_APPLICATION_ID,runtime,integrations,app/api/mercadopago/webhook/route.ts,env.example: your-mercadopago-application-id,Validated vs payment.application_id
+MP_APPLICATION_ID,runtime,integrations,app/api/mercadopago/webhook/route.ts,env.example: your-mercadopago-application-id,Alias for application id
+MERCADOPAGO_WEBHOOK_SECRET,runtime,integrations,app/api/mercadopago/webhook/route.ts,env.example: your-mercadopago-webhook-secret,Alternative for webhook signature
+NEXT_WEBHOOK_MERCADOPAGO_KEY_SECRET,runtime,integrations,app/api/mercadopago/webhook/route.ts,.env.example: changeme-webhook-secret,Primary webhook signature secret
+MP_CLIENT_ID,runtime,integrations,lib/mercadopago.ts,.env.example: changeme,OAuth client id (if used)
+MP_CLIENT_SECRET,runtime,integrations,lib/mercadopago.ts,.env.example: changeme,OAuth client secret (if used)
+MP_REDIRECT_URI,build|runtime,integrations,app/api/supplier/mercadopago/callback/route.ts,.env.example: http://localhost:3000/api/supplier/mercadopago/callback,OAuth redirect
+MP_PAYOUTS_ENABLED,runtime,integrations,lib/wallet.ts,.env.example: false,Feature toggle for payouts
+MP_USE_APPLICATION_FEE,runtime,integrations,lib/commission.ts,.env.example: false,Toggle for marketplace fee
+RESEND_API_KEY,runtime,email,lib/resend.ts,.env.example: changeme,Resend API key
+RESEND_WEBHOOK_SECRET,runtime,email,app/api/resend/webhook/route.ts,.env.example: changeme,Validates email webhooks (if present)
+RESEND_FROM,build|runtime,email,lib/resend.ts,.env.example: no-reply@yourdomain.com,Sender address fallback used by email sender
+CLOUDINARY_CLOUD_NAME,build|runtime,media,next.config.js|lib/cloudinary.ts,.env.example: changeme,Cloudinary config
+CLOUDINARY_API_KEY,runtime,media,lib/cloudinary.ts,.env.example: changeme,Server-side only
+CLOUDINARY_API_SECRET,runtime,media,lib/cloudinary.ts,.env.example: changeme,Server-side only
+CLOUDINARY_UPLOAD_PRESET,build,media,components/admin/banners/upload.tsx,.env.example: salta_conecta,Unsigned upload preset (if used)
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,build,media,next.config.js,.env.example: changeme,Client-side usage
+NEXT_PUBLIC_VAPID_PUBLIC_KEY,build,notifications,lib/push.ts,.env.example: changeme,Push notifications public key
+VAPID_PRIVATE_KEY,runtime,notifications,lib/push.ts,.env.example: changeme,Push notifications private key
+REDIS_URL,runtime,cache,lib/redis.ts|pages/api/socket.ts,env.example: redis://localhost:6379,Redis connection string for ioredis (Socket.IO adapter)
+UPSTASH_REDIS_REST_URL,runtime,cache,lib/redis.ts,.env.example: https://<host>,Upstash REST URL alternative
+UPSTASH_REDIS_REST_TOKEN,runtime,cache,lib/redis.ts,.env.example: changeme,Upstash REST token
+DRIVER_APPROVAL_REQUIRED,build|runtime,features,constants/index.ts,.env.example: true,Feature flag
+DRIVER_MIN_AGE,build|runtime,features,constants/index.ts,.env.example: 18,Feature flag
+DRIVER_MAX_DAILY_DELIVERIES,build|runtime,features,constants/index.ts,.env.example: 15,Feature flag
+DRIVER_BASE_RATE_PER_KM,build|runtime,features,constants/index.ts,.env.example: 520,Feature flag
+ORDER_AUTO_ASSIGNMENT_ENABLED,build|runtime,features,lib/assignment/auto-assign.ts,.env.example: true,Feature flag
+ORDER_MAX_PENDING_TIME_HOURS,build|runtime,features,lib/logistics/assignment.ts,.env.example: 72,Feature flag
+ORDER_QR_VALIDATION_ENABLED,build|runtime,features,app/api/orders/[id]/confirm-*/route.ts,.env.example: true,Feature flag
+PUSH_NOTIFICATIONS_ENABLED,build|runtime,features,constants/index.ts,.env.example: true,Feature flag
+EMAIL_NOTIFICATIONS_ENABLED,build|runtime,features,lib/resend.ts,.env.example: true,Feature flag
+SMS_NOTIFICATIONS_ENABLED,build|runtime,features,lib/sms.ts,.env.example: false,Feature flag
+ANALYTICS_ENABLED,build|runtime,features,components/admin/analytics-overview.tsx,.env.example: true,Feature flag
+DEBUG_MODE,build|runtime,debug,lib/logger.ts,.env.example: true,Conditional logging
+USE_HTTPS,build|runtime,server,server.js,.env.example: false,Dev HTTPS toggle
+HOSTNAME,build|runtime,server,server.js,.env.example: localhost,Dev hostname
+AUCTIONS_CREATE_ORDER_AFTER_PAID,runtime,features,app/api/mercadopago/webhook/route.ts,env.example: true,Create order after auction payment
+AUTH_SECRET,runtime,auth,lib/auth.ts,env.example: your-auth-secret-key-here,Additional secret used by NextAuth adapter
+CORS_ORIGIN,build|runtime,security,next.config.js,env.example: http://localhost:3000,CORS allowlist
+ALLOWED_ORIGINS,build|runtime,security,next.config.js,env.example: http://localhost:3000,Comma-separated origins
+LOG_LEVEL,build|runtime,observability,lib/logger.ts,env.example: info,Logging level
+ENABLE_REQUEST_LOGGING,build|runtime,observability,lib/logger.ts,env.example: true,Toggle request logging
+ENABLE_ERROR_LOGGING,build|runtime,observability,lib/logger.ts,env.example: true,Toggle error logging
+ENABLE_DEV_TOOLS,build|runtime,features,lib/dev-tools.ts,env.example: true,Dev tooling toggles
+ENABLE_ANALYTICS,build|runtime,features,components/admin/analytics-overview.tsx,env.example: false,Legacy alias to ANALYTICS_ENABLED
+ENABLE_PERFORMANCE_MONITORING,build|runtime,features,lib/monitoring.ts,env.example: false,APM toggle

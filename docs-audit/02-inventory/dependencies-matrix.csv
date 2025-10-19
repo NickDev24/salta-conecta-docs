@@ -1,0 +1,82 @@
+package,version,type(dep|devDep),usedIn(module/paths),risk(dup/legacy),note
+next,^15.0.0,dep,app/|pages/|next.config.js,legacy,"Core framework"
+react,^18.0.0,dep,components/|app/,legacy,"Pinned to 18 while Next 15 supports 18/19"
+react-dom,^18.0.0,dep,components/|app/,legacy,
+next-auth,^4.24.11,dep,lib/auth.ts|types/next-auth.d.ts,legacy,"v4 stable; watch v5 migration"
+mongodb,^5.9.2,dep,lib/mongodb.ts,legacy,"Driver used via mongoose; direct use may be minimal"
+mongoose,^7.6.0,dep,models/*|lib/mongodb.ts,,"Primary ODM"
+zod,^3.22.0,dep,schemas/*|lib/validators.ts,,"Validation library"
+@tanstack/react-query,^5.84.1,dep,components/*|hooks/*,,
+@tanstack/react-query-devtools,^5.84.1,dep,dev-only usage in app layout?,legacy,"Should be dev-only"
+@upstash/redis,^1.35.3,dep,lib/redis.ts,dup,"Co-exists with ioredis; choose one"
+ioredis,^5.7.0,dep,lib/redis.ts|pages/api/socket.ts,dup,"Co-exists with Upstash"
+@socket.io/redis-adapter,^8.3.0,dep,pages/api/socket.ts,,
+socket.io,^4.8.1,dep,pages/api/socket.ts|lib/socket.ts,,
+socket.io-client,^4.8.1,dep,components/WebSocketStatus.tsx,,
+@next-auth/mongodb-adapter,^1.1.3,dep,lib/auth.ts,,
+mercadopago,^2.0.0,dep,lib/mercadopago.ts|app/api/mercadopago/*,,
+@mercadopago/sdk-react,^0.0.19,dep,components/checkout/checkout-page.tsx,,
+resend,^6.0.1,dep,lib/resend.ts|app/api/*email*,,
+nodemailer,^6.9.0,dep,lib/email.ts,legacy,"Might be redundant with Resend"
+cloudinary,^1.41.0,dep,lib/cloudinary.ts|components/*upload*,,
+jsonwebtoken,^9.0.2,dep,lib/auth.ts,,
+bcryptjs,^2.4.3,dep,lib/auth.ts,,
+rate-limiter-flexible,^7.2.0,dep,lib/rate-limit.ts,,
+@react-google-maps/api,^2.20.7,dep,components/*maps*|contexts/GoogleMapsContext.tsx,,
+@googlemaps/google-maps-services-js,^3.4.2,dep,lib/geocode.ts,,
+qrcode,^1.5.4,dep,components/driver/qr-validation.tsx|app/api/qr-verification/*,,
+clsx,^2.0.0,dep,components/*,,
+class-variance-authority,^0.7.1,dep,components/ui/*,,
+lucide-react,^0.400.0,dep,components/*icons*,,
+framer-motion,^12.23.12,dep,components/animations/*,,
+recharts,^2.8.0,dep,components/admin/*charts*,,
+react-hook-form,^7.48.0,dep,components/*forms*,,
+@hookform/resolvers,^3.3.0,dep,components/*forms*,,
+react-toastify,^11.0.5,dep,components/*notifications*,,
+sonner,^2.0.7,dep,components/*notifications*,dup,"Multiple notification libs"
+zustand,^4.4.0,dep,store/*,,
+embla-carousel-react,^8.6.0,dep,components/*carousel*,,
+embla-carousel-autoplay,^8.6.0,dep,components/*carousel*,,
+moment,^2.30.1,dep,lib/date.ts,legacy,"Heavy/legacy, consider date-fns"
+date-fns,^2.30.0,dep,lib/date.ts,dup,"Moment + date-fns both present"
+dotenv,^17.2.1,dep,server.js|scripts/*,,
+postcss,^8.4.0,dep,postcss.config.js,,
+autoprefixer,^10.4.0,dep,postcss.config.js,,
+tailwindcss,^3.4.0,dep,tailwind.config.js,,
+@tailwindcss/forms,^0.5.0,dep,tailwind plugin,,
+@tailwindcss/typography,^0.5.0,dep,tailwind plugin,,
+vercel,^48.3.0,dep,deploy scripts,legacy,"Deploy CLI; ensure not bundled"
+typescript,^5.9.2,dep,build tooling,legacy,"Should be devDep typically"
+
+@testing-library/react,^16.3.0,devDep,__tests__/*,,
+@testing-library/jest-dom,^6.6.4,devDep,jest.setup.js|__tests__/*,,
+jest,^30.0.5,devDep,jest.config.js,,
+jest-environment-jsdom,^30.0.5,devDep,jest.config.js,,
+next-i18next,^15.4.2,devDep,next-i18next.config.js,,
+eslint,^9.35.0,devDep,.eslintrc.json,,
+eslint-config-next,^15.0.0,devDep,.eslintrc.json,,
+prettier,^3.0.0,devDep,.prettierrc,,
+prettier-plugin-tailwindcss,^0.5.0,devDep,.prettierrc,,
+critters,^0.0.25,devDep,next.config.js,legacy,"Consider Next built-in optimizations"
+ts-node,^10.9.2,devDep,scripts/*,,
+tsx,^4.20.3,devDep,scripts/*,,
+@typescript-eslint/eslint-plugin,^8.43.0,devDep,.eslintrc.json,,
+@typescript-eslint/parser,^8.43.0,devDep,.eslintrc.json,,
+@types/node,^20.19.11,devDep,tsconfig.json,,
+@types/react,^18.3.23,devDep,tsconfig.json,,
+@types/react-dom,^18.3.7,devDep,tsconfig.json,,
+@types/jest,^30.0.0,devDep,jest.config.js,,
+@types/jsonwebtoken,^9.0.5,devDep,types,,
+@types/bcryptjs,^2.4.6,devDep,types,,
+@types/nodemailer,^6.4.14,devDep,types,,
+@types/socket.io,^3.0.1,devDep,types,,
+@types/socket.io-client,^1.4.36,devDep,types,,
+@types/uuid,^10.0.0,devDep,types,,
+@types/redis,^4.0.10,devDep,types,legacy,"ioredis used; @types/redis may be stale"
+@types/streamifier,^0.1.2,devDep,types,,
+@types/testing-library__jest-dom,^5.14.9,devDep,types,,
+@types/winston,^2.4.4,devDep,types,legacy,"Old major type for winston"
+@types/estree,^1.0.8,devDep,types,,
+@types/json-schema,^7.0.15,devDep,types,,
+@types/babel__* ,^7.x,devDep,types,,"babel types used by tooling"
+@next/bundle-analyzer,^15.5.2,devDep,next.config.js,,

@@ -1,0 +1,8 @@
+path,methods(GET|POST|PUT|DELETE),hasAuth,hasRoleCheck,hasValidation(Zod),uses(DB|Redis|MP|Cloudinary|Resend),errorHandling(try/catch|std),idempotency,notes
+/app/api/admin/analytics,GET,true,true,false,DB,try/catch,false,"Uses `requireAdmin()`; queries multiple models: `User`, `Order`, `Cart`, `Category`, `Product` in `app/api/admin/analytics/route.ts`"
+/app/api/account/addresses,GET|POST,true,true,false,DB,try/catch,false,"Auth via `getServerSession(authOptions)` and role 'client'; manual field validation in `app/api/account/addresses/route.ts`"
+/pages/api/socket,GET,false,false,false,Redis,std,false,"Initializes Socket.IO with Redis adapter if available in `pages/api/socket.ts`"
+/app/api/mercadopago/webhook,GET|POST,false,false,false,DB|Resend|MP,try/catch,true,"Validates MP webhook signature; uses idempotency locks; updates `Order`, `PaymentLog`, `Payout`, notifies via email/WebSocket in `app/api/mercadopago/webhook/route.ts`"
+/app/api/orders/[id]/retry-payment,POST,true,true,true,DB|MP,try/catch,false,"Zod optional schema; `getServerSession(authOptions)`; owner or admin; creates MP preference in `app/api/orders/[id]/retry-payment/route.ts`"
+/app/api/orders/[id]/confirm-delivery,POST,true,true,true,DB,try/catch,false,"Zod body schema; session via `getServerSessionFromRequest`; role-based checks (driver/supplier) in `app/api/orders/[id]/confirm-delivery/route.ts`"
+/app/api/drivers/connect,POST,false,false,true,DB,try/catch,false,"Zod body schema; no auth; toggles driver availability and may assign route atomically in `app/api/drivers/connect/route.ts`"
